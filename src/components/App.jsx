@@ -21,10 +21,16 @@ class App extends Component {
     });
   };
 
+  countTotalFeedback = () => {
+    const {good, neutral, bad} = this.state;
+    return good + neutral + bad;
+  }
+
   render() {
     console.log(this.state);
     const keys = Object.keys(this.state);
     const { good, neutral, bad } = this.state;
+    const totalFeedback = this.countTotalFeedback();
 
     return (
       // <div
@@ -47,6 +53,7 @@ class App extends Component {
           <li>Good: {good}</li>
           <li>Neutral: {neutral}</li>
           <li>Bad: {bad}</li>
+          <li>Total: {totalFeedback}</li>
         </ul>
       </Container>
     );
