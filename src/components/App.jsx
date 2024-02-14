@@ -41,38 +41,25 @@ class App extends Component {
     const percentage = this.countPositiveFeedbackPercentage().toFixed();
 
     return (
-      // <div
-      //   style={{
-      //     height: '100vh',
-      //     display: 'flex',
-      //     justifyContent: 'center',
-      //     alignItems: 'center',
-      //     fontSize: 40,
-      //     color: '#010101',
-      //   }}
-      // >
-      //   React homework template
-      // </div>
-
       <Container>
-        <Section title="Please leave feedback">
+        <Section title='Please leave feedback'>
           <FeedbackOptions
             options={keys}
             onLeaveFeedback={this.handleButton}
           />
         </Section>
-        <Section title="Statistics">
+        <Section title='Statistics'>
           {totalFeedback ?
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={totalFeedback}
-            positivePercentage={percentage}
-            title="Statistics"
-          />
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={totalFeedback}
+              positivePercentage={percentage}
+              title='Statistics'
+            />
             :
-            <Notification message="There is no feedback" />
+            <Notification message='There is no feedback' />
           }
         </Section>
       </Container>
