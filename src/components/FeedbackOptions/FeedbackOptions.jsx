@@ -1,19 +1,23 @@
+import s from './FeedbackOptions.module.css';
+
 const FeedbackOptions = ({ options, onLeaveFeedback }) => {
 
   return (
-    <>
-      <p>Please leave feedback</p>
+    <ul className={s.list}>
       {options.map(option => (
-        <button
-          type='button'
-          key={option}
-          name={option}
-          onClick={onLeaveFeedback}
-        >
-          {option}
-        </button>
+        <li>
+          <button
+            className={s.button}
+            type='button'
+            key={option}
+            name={option}
+            onClick={onLeaveFeedback}
+          >
+            {option}
+          </button>
+        </li>
       ))}
-    </>
+    </ul>
   );
 };
 
