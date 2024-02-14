@@ -1,7 +1,9 @@
 import { Component } from 'react';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
-import Statistics from './Statistics/Statistics';
 import Container from './Container/Container';
+import Statistics from './Statistics/Statistics';
+import Notification from './Notification/Notification';
+import Section from './Section/Section';
 
 class App extends Component {
   state = {
@@ -9,7 +11,6 @@ class App extends Component {
     neutral: 0,
     bad: 0,
   };
-
 
   handleButton = e => {
     const { name } = e.currentTarget;
@@ -22,15 +23,22 @@ class App extends Component {
   };
 
   countTotalFeedback = () => {
-    const {good, neutral, bad} = this.state;
+    const { good, neutral, bad } = this.state;
     return good + neutral + bad;
-  }
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
+    const total = this.countTotalFeedback();
+    return (good / total) * 100 || 0;
+  };
 
   render() {
     console.log(this.state);
     const keys = Object.keys(this.state);
     const { good, neutral, bad } = this.state;
     const totalFeedback = this.countTotalFeedback();
+    const percentage = this.countPositiveFeedbackPercentage().toFixed();
 
     return (
       // <div
@@ -47,17 +55,29 @@ class App extends Component {
       // </div>
 
       <Container>
-        <FeedbackOptions options={keys} onLeaveFeedback={this.handleButton} />
-        <p>Statistics</p>
-        <ul>
-          <li>Good: {good}</li>
-          <li>Neutral: {neutral}</li>
-          <li>Bad: {bad}</li>
-          <li>Total: {totalFeedback}</li>
-        </ul>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={keys}
+            onLeaveFeedback={this.handleButton}
+          />
+        </Section>
+        <Section title="Statistics">
+          {totalFeedback ?
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={totalFeedback}
+            positivePercentage={percentage}
+            title="Statistics"
+          />
+            :
+            <Notification message="There is no feedback" />
+          }
+        </Section>
       </Container>
     );
   }
-};
+}
 
 export default App;
