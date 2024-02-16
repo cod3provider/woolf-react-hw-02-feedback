@@ -12,9 +12,7 @@ class App extends Component {
     bad: 0,
   };
 
-  handleButton = e => {
-    const { name } = e.currentTarget;
-    // console.log(e.currentTarget.name);
+  handleButton = name => {
     this.setState(prevState => {
       return {
         [name]: prevState[name] + 1,
