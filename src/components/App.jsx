@@ -32,7 +32,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state);
     const keys = Object.keys(this.state);
     const { good, neutral, bad } = this.state;
     const totalFeedback = this.countTotalFeedback();
